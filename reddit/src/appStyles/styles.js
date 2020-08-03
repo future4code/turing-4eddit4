@@ -19,8 +19,26 @@ export const MyTheme = styled.div`
     cursor: pointer;
     transition-duration: 0.4s;
   }
+  button + button {
+    background-color: #fff; 
+    border-radius: 4px;
+    border: 1px solid #0079d3;
+    color: #0079d3;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
   button:hover{
     background-color: rgba(0,121,211,0.5);
+  }
+  button + button:hover{
+    color: white;
+    outline: none;
+    border: none;
   }
   input, textarea, select {
     width: 100%;

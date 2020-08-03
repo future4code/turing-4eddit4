@@ -4,7 +4,6 @@ export const FeedPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dae0e6;
 `
 
 export const NewPost = styled.form`
