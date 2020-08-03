@@ -5,6 +5,6 @@ export const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEd
 export const axiosConfig = {
   headers: {
     'Content-Type': 'application/json',
-    auth: token
+    Authorization : token
   }
 }
