@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { AppBar } from './styles'
 
 export default function AppBarComponent () {
-  const token = window.localStorage.getItem('token');
   const history = useHistory();
 
   const handleLogout = () => {

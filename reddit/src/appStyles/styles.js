@@ -5,6 +5,7 @@ export const MyTheme = styled.div`
   padding: 0;
   color: #7d7a7a;
   border-color: #7d7a7a;
+  font-family: verdana!important;
   button {
     background-color: #0079d3; 
     border: none;

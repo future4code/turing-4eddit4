@@ -21,7 +21,7 @@ export default function Router () {
           <AppBarComponent />
           <FeedPage />
         </Route>
-        <Route exact path='/loggedIn/SinglePostPage'>
+        <Route exact path='/loggedIn/SinglePostPage/:PostId'>
           <AppBarComponent />
           <SinglePostPage />
         </Route>
