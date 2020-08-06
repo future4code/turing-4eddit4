@@ -7,8 +7,12 @@ const useForm = initialValues => {
     const newForm = { ...form, [name]: value };
     setForm(newForm);
   };
+  
+  const hadleInputClear = () => {
+    setForm(initialValues);
+  }
 
-  return { form, onChange };
+  return { form, onChange, hadleInputClear };
 };
 
 export default useForm;

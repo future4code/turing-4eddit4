@@ -93,10 +93,6 @@ export default function SinglePostPage (){
     const body = {
       'text': `${form.text}`,
     };
-    console.log(`${baseUrl}posts/${params.PostId}/comment`, 
-    body, 
-    axiosConfig
-  )
     axios
     .post(`${baseUrl}posts/${params.PostId}/comment`, 
       body, 
@@ -139,13 +135,17 @@ export default function SinglePostPage (){
           <LikesAndCount>
             <PostLiked onClick={() => onClickLike(singlePost.id, 1)}/>
             <p>{singlePost.votesCount}</p>
-            <PostDisliked onClick={() => onClickLike(singlePost.id, 0)}/>
+            <PostDisliked onClick={() => onClickLike(singlePost.id, -1)}/>
           </LikesAndCount>
-          <div>
+          {singlePost.userVoteDirection !== 0 &&
             <p>
-              {singlePost.commentsCount} Comentários
+              Seu voto foi 
+              {singlePost.userVoteDirection === 1? <PostLiked /> : <PostDisliked />}
             </p>
-          </div>
+          }
+          <p>
+            {singlePost.commentsCount} Comentários
+          </p>
         </SinglePostFooter>
       </SinglePost>
 
@@ -178,8 +178,15 @@ export default function SinglePostPage (){
           <LikesAndCount>
             <PostLiked onClick={() => onClickLikeComment(comment.id, 1)}/>
             <p>{comment.votesCount}</p>
-            <PostDisliked onClick={() => onClickLikeComment(comment.id, 0)}/>
+            <PostDisliked onClick={() => onClickLikeComment(comment.id, -1)}/>
           </LikesAndCount>
+
+          {comment.userVoteDirection !== 0 &&
+            <p>
+              Seu voto foi 
+              {comment.userVoteDirection === 1 ? <PostLiked /> : <PostDisliked />}
+            </p>
+          }
           </SinglePostFooter>
         </SingleComment>
         )
