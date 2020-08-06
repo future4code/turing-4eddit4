@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { 
   FeedPageContainer, 
@@ -11,14 +11,18 @@ import {
   LikesAndCount,
   CommentsWrapper  
 } from './styles';
+
 import useForm from '../../hooks/useForm';
+import useGetPosts from '../../hooks/useGetPosts';
+
 import axios from 'axios';
 import { baseUrl, axiosConfig } from '../../constants/axios';
 
 export default function FeedPage (){
   const token = window.localStorage.getItem('token');
-  const [posts, setPosts] = useState([]);
-  const { form, onChange } = useForm({
+  const [ posts, getPosts ] = useGetPosts();
+ 
+  const { form, onChange, hadleInputClear } = useForm({
     text: '',
     title: '',
   });
@@ -29,21 +33,6 @@ export default function FeedPage (){
       history.push('/');
     }
   }, [history, token]);
-
-  useEffect(() => {
-    getPosts();
-  },[]);
-  
-  const getPosts = () => {
-    axios
-    .get(`${baseUrl}posts`, axiosConfig)
-    .then( response => {
-      setPosts(response.data.posts)
-    })
-    .catch( err => {
-      console.log(err.message);
-    })
-  }
 
   const createPost = () => {
     const body = {
@@ -57,6 +46,7 @@ export default function FeedPage (){
     )
     .then( response => {
       alert('Post criado!');
+      hadleInputClear();
       getPosts();
     })
     .catch( err => {
@@ -136,8 +126,14 @@ export default function FeedPage (){
             <LikesAndCount>
               <PostLiked onClick={() => onClickLike(post.id, 1)}/>
               <p>{post.votesCount}</p>
-              <PostDisliked onClick={() => onClickLike(post.id, 0)}/>
+              <PostDisliked onClick={() => onClickLike(post.id, -1)}/>
             </LikesAndCount>
+            {post.userVoteDirection !== 0 &&
+              <p>
+                Seu voto foi 
+                {post.userVoteDirection === 1? <PostLiked /> : <PostDisliked />}
+              </p>
+            }
             <CommentsWrapper onClick={() => onClickComment(post.id)}>
               <p>
                 {post.commentsCount} Comentários
