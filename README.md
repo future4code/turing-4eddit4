@@ -1,4 +1,4 @@
-##Projeto Labedit - mvp de rede social com integração a banco de dados coletivo.
+## Projeto Labedit - mvp de rede social com integração a banco de dados coletivo.
 
 ![5](https://user-images.githubusercontent.com/65511670/89673510-ea070000-d8bc-11ea-9efb-711e9a272164.png)
 ![6](https://user-images.githubusercontent.com/65511670/89673512-ea070000-d8bc-11ea-9546-8a94692585d9.png)
