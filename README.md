@@ -1,4 +1,9 @@
+##Projeto Labedit - mvp de rede social com integração a banco de dados coletivo.
+
 ![5](https://user-images.githubusercontent.com/65511670/89673510-ea070000-d8bc-11ea-9efb-711e9a272164.png)
+![6](https://user-images.githubusercontent.com/65511670/89673512-ea070000-d8bc-11ea-9546-8a94692585d9.png)
+![7](https://user-images.githubusercontent.com/65511670/89673508-e8d5d300-d8bc-11ea-9085-2dd60c784147.png)
+![8](https://user-images.githubusercontent.com/65511670/89673516-ea070000-d8bc-11ea-8208-0f58c95fc599.png)
 
 ## Exercício da Semana:
 
