@@ -67,6 +67,9 @@ export const PostPic = styled.div`
 export const SinglePostText = styled.div`
   min-height: 20vh;
   padding: 0.85rem;
+  p{
+    font-size: 0.8rem;
+  }
 `;
 export const SinglePostFooter = styled.div`
   display: flex;
