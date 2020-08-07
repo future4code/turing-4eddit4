@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { 
   FeedPageContainer, 
   NewPost, SinglePost, 
-  SinglePostHeader, 
+  SinglePostHeader,
+  UserWrapper,
+  AvatarContainer,
+  TittleWrapper,
+  PostPic,
   SinglePostText, 
   SinglePostFooter, 
   PostLiked, 
@@ -11,6 +15,8 @@ import {
   LikesAndCount,
   CommentsWrapper  
 } from './styles';
+
+import Loader from '../Loader/Loader';
 
 import useForm from '../../hooks/useForm';
 import useGetPosts from '../../hooks/useGetPosts';
@@ -20,8 +26,9 @@ import { baseUrl, axiosConfig } from '../../constants/axios';
 
 export default function FeedPage (){
   const token = window.localStorage.getItem('token');
-  const [ posts, getPosts ] = useGetPosts();
- 
+  const [ posts, getPosts, loading ] = useGetPosts();
+
+
   const { form, onChange, hadleInputClear } = useForm({
     text: '',
     title: '',
@@ -90,6 +97,9 @@ export default function FeedPage (){
 
   return(
     <FeedPageContainer>
+      { loading ? 
+      (<Loader />) : 
+      (<> 
       <NewPost onSubmit={handleSendPost}>
         <input
           value={form.title}
@@ -112,37 +122,53 @@ export default function FeedPage (){
         <button>POSTAR</button>
       </NewPost>
 
-      {posts.map(post => {
-      return(
-        <SinglePost key={post.id}>
-          <SinglePostHeader>
-            <h4>{post.title}</h4>
-            <h4>Por: {post.username}</h4>
-          </SinglePostHeader>
-          <SinglePostText>
-            <p>{post.text}</p>
-          </SinglePostText>
-          <SinglePostFooter>
-            <LikesAndCount>
-              <PostLiked onClick={() => onClickLike(post.id, 1)}/>
-              <p>{post.votesCount}</p>
-              <PostDisliked onClick={() => onClickLike(post.id, -1)}/>
-            </LikesAndCount>
-            {post.userVoteDirection !== 0 &&
-              <p>
-                Seu voto foi 
-                {post.userVoteDirection === 1? <PostLiked /> : <PostDisliked />}
-              </p>
-            }
-            <CommentsWrapper onClick={() => onClickComment(post.id)}>
-              <p>
-                {post.commentsCount} Comentários
-              </p>
-            </CommentsWrapper>
-          </SinglePostFooter>
-        </SinglePost>
-        )
-      })}
+        {posts.map(post => {
+        return(
+          <SinglePost key={post.id}>
+            <SinglePostHeader>
+              <UserWrapper>
+                <AvatarContainer 
+                  src="https://picsum.photos/10"
+                  alt="new"
+                />
+                <p>Posted by u/{post.username}</p>
+              </UserWrapper>
+              <TittleWrapper>
+                <h4>{post.title}</h4>
+              </TittleWrapper>
+            </SinglePostHeader>
+
+            <SinglePostText>
+              <PostPic>
+                <img src="https://picsum.photos/520/320"
+                  alt="new"
+                />  
+              </PostPic>              
+              <p>{post.text}</p>
+            </SinglePostText>
+
+            <SinglePostFooter>
+              <LikesAndCount>
+                <PostLiked onClick={() => onClickLike(post.id, 1)}/>
+                <p>{post.votesCount}</p>
+                <PostDisliked onClick={() => onClickLike(post.id, -1)}/>
+              </LikesAndCount>
+              {post.userVoteDirection !== 0 &&
+                <p>
+                  Seu voto foi 
+                  {post.userVoteDirection === 1? <PostLiked /> : <PostDisliked />}
+                </p>
+              }
+              <CommentsWrapper onClick={() => onClickComment(post.id)}>
+                <p>
+                  {post.commentsCount} Comentários
+                </p>
+              </CommentsWrapper>
+            </SinglePostFooter>
+          </SinglePost>
+          )
+        })}
+      </>)}
     </FeedPageContainer>
   )
 }

@@ -35,12 +35,33 @@ export const SinglePost = styled.form`
 `;
 export const SinglePostHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   border-bottom: 1px solid #ccc; 
   padding: 0.85rem;
-  h4{
-    margin: 0;
-    padding: 0;
+
+`;
+export const UserWrapper = styled.div`
+  display: flex;
+  p{
+    font-size: 0.8rem;
+  }
+`;
+export const AvatarContainer = styled.img`
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 0 4px 4px 0; 
+`;
+export const TittleWrapper = styled.div`
+  color: #504848;
+`;
+export const PostPic = styled.div`
+  text-align: center;
+
+  img{
+    max-width: 95%;
+  height: auto;
+  border-radius: 8px;
   }
 `;
 export const SinglePostText = styled.div`
@@ -52,10 +73,7 @@ export const SinglePostFooter = styled.div`
   justify-content: space-between;
   border-top: 1px solid #ccc;
   padding: 0.85rem;
-  p{
-    margin: 0;
-    padding: 0;
-  }
+
 `;
 export const LikesAndCount = styled.div`
   display: flex;
@@ -78,7 +96,6 @@ export const PostDisliked = styled(DownArrow)`
     color: #0079d3;
   }
 `;
-
 export const CommentsWrapper = styled.div`
   cursor: pointer;
 `

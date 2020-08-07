@@ -3,7 +3,11 @@ import { useHistory, useParams } from 'react-router-dom';
 import { 
   FeedPageContainer, 
   NewPost, SinglePost, 
-  SinglePostHeader, 
+  SinglePostHeader,
+  UserWrapper,
+  AvatarContainer,
+  TittleWrapper,
+  PostPic, 
   SinglePostText, 
   SinglePostFooter, 
   PostLiked, 
@@ -11,19 +15,24 @@ import {
   LikesAndCount,
   SingleComment,
 } from './styles';
+
+import Loader from '../Loader/Loader';
+
 import useForm from '../../hooks/useForm';
+
 import axios from 'axios';
 import { baseUrl, axiosConfig } from '../../constants/axios';
 
 export default function SinglePostPage (){
   const [singlePost, setSinglePost] = useState([]);
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const token = window.localStorage.getItem('token');
   const history = useHistory();
   const params = useParams();
 
-  const { form, onChange } = useForm({
+  const { form, onChange, hadleInputClear } = useForm({
     text: '',
   });
 
@@ -38,16 +47,20 @@ export default function SinglePostPage (){
   }, []);
 
   const getSinglePost = () => {
+    setLoading(true)
     axios
     .get(`${baseUrl}posts/${params.PostId}`, 
       axiosConfig
     )
     .then( response => {
       setSinglePost(response.data.post);
-      setComments(response.data.post.comments)
+      const someComments = (response.data.post.comments)
+      setComments(someComments.slice(0, 10))
+      setLoading(false)
     })
     .catch( err => {
       alert(err.message);
+      setLoading(false)
     })
   };
 
@@ -100,6 +113,7 @@ export default function SinglePostPage (){
     )
     .then( response => {
       alert('Comentário enviado.');
+      hadleInputClear();
       getSinglePost();
     })
     .catch( err => {
@@ -120,14 +134,29 @@ export default function SinglePostPage (){
 
   return(
     <FeedPageContainer>
+      { loading ? 
+      (<Loader />) : 
+      (<>
       <SinglePost>
-
         <SinglePostHeader>
-          <h4>{singlePost.title}</h4>
-          <h4>Por: {singlePost.username}</h4>
-          </SinglePostHeader>
+          <UserWrapper>
+            <AvatarContainer 
+              src="https://picsum.photos/10"
+              alt="new"
+            />
+            <p>Posted by u/{singlePost.username}</p>
+          </UserWrapper>
+          <TittleWrapper>
+            <h4>{singlePost.title}</h4>
+          </TittleWrapper>
+        </SinglePostHeader>
 
         <SinglePostText>
+          <PostPic>
+            <img src="https://picsum.photos/300/420"
+              alt="new"
+            />  
+          </PostPic> 
           <p>{singlePost.text}</p>
         </SinglePostText>
 
@@ -162,35 +191,36 @@ export default function SinglePostPage (){
         />
         <button>COMENTAR</button>
       </NewPost>
-
       {comments.map(comment => {
-      return(
-        <SingleComment key={comment.id}>
-          <SinglePostHeader>
-            <h4>Comentário de: {comment.username}</h4>
-          </SinglePostHeader>
+        return(
+          <SingleComment key={comment.id}>
+            <SinglePostHeader>
+              <h4>Comentário de: {comment.username}</h4>
+            </SinglePostHeader>
 
-          <SinglePostText>
-            <p>{comment.text}</p>
-          </SinglePostText>
+            <SinglePostText>
+              <p>{comment.text}</p>
+            </SinglePostText>
 
-          <SinglePostFooter>
-          <LikesAndCount>
-            <PostLiked onClick={() => onClickLikeComment(comment.id, 1)}/>
-            <p>{comment.votesCount}</p>
-            <PostDisliked onClick={() => onClickLikeComment(comment.id, -1)}/>
-          </LikesAndCount>
+            <SinglePostFooter>
+            <LikesAndCount>
+              <PostLiked onClick={() => onClickLikeComment(comment.id, 1)}/>
+              <p>{comment.votesCount}</p>
+              <PostDisliked onClick={() => onClickLikeComment(comment.id, -1)}/>
+            </LikesAndCount>
 
-          {comment.userVoteDirection !== 0 &&
-            <p>
-              Seu voto foi 
-              {comment.userVoteDirection === 1 ? <PostLiked /> : <PostDisliked />}
-            </p>
-          }
-          </SinglePostFooter>
-        </SingleComment>
-        )
-      })}
+            {comment.userVoteDirection !== 0 &&
+              <p>
+                Seu voto foi 
+                {comment.userVoteDirection === 1 ? <PostLiked /> : <PostDisliked />}
+              </p>
+            }
+            </SinglePostFooter>
+          </SingleComment>
+          )
+        })}
+        </>)
+      }
     </FeedPageContainer>
   )
 }
