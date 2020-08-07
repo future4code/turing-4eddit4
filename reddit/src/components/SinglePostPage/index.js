@@ -134,9 +134,6 @@ export default function SinglePostPage (){
 
   return(
     <FeedPageContainer>
-      { loading ? 
-      (<Loader />) : 
-      (<>
       <SinglePost>
         <SinglePostHeader>
           <UserWrapper>
@@ -191,6 +188,9 @@ export default function SinglePostPage (){
         />
         <button>COMENTAR</button>
       </NewPost>
+      { loading ? 
+      (<Loader />) : 
+      (<>
       {comments.map(comment => {
         return(
           <SingleComment key={comment.id}>

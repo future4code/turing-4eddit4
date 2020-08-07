@@ -97,9 +97,6 @@ export default function FeedPage (){
 
   return(
     <FeedPageContainer>
-      { loading ? 
-      (<Loader />) : 
-      (<> 
       <NewPost onSubmit={handleSendPost}>
         <input
           value={form.title}
@@ -121,7 +118,9 @@ export default function FeedPage (){
         />
         <button>POSTAR</button>
       </NewPost>
-
+      { loading ? 
+      (<Loader />) : 
+      (<> 
         {posts.map(post => {
         return(
           <SinglePost key={post.id}>
