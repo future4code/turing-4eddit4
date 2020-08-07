@@ -21,28 +21,42 @@ export const NewPost = styled.form`
   button{
     margin: 0.85rem 0 0 0;
   }
-`
+`;
 export const SinglePost = styled.form`
   width: 40vw;
   margin: 1.5rem 0;
   border-radius: 4px;
   border: 1px solid #ccc; 
   background-color: #fff;
-`
+`;
 export const SinglePostHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   border-bottom: 1px solid #ccc; 
   padding: 0.85rem;
-  h4{
-    margin: 0;
-    padding: 0;
+`;
+export const UserWrapper = styled.div`
+  display: flex;
+  p{
+    font-size: 0.8rem;
   }
-`
+`;
+export const AvatarContainer = styled.img`
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 0 4px 4px 0; 
+`;
+export const TittleWrapper = styled.div`
+  color: #504848;
+`;
+export const PostPic = styled.div`
+  text-align: center;
+`;
 export const SinglePostText = styled.div`
   min-height: 20vh;
   padding: 0.85rem;
-`
+`;
 export const SinglePostFooter = styled.div`
   display: flex;
   justify-content: space-between;
