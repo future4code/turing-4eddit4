@@ -50,8 +50,9 @@ export default function SinglePostPage (){
     setLoading(true)
     axios
     .get(`${baseUrl}posts/${params.PostId}`, 
-      axiosConfig
-    )
+    {headers: {
+      Authorization : token
+    }})
     .then( response => {
       setSinglePost(response.data.post);
       const someComments = (response.data.post.comments)

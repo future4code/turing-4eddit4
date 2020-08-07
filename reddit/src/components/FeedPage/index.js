@@ -28,7 +28,6 @@ export default function FeedPage (){
   const token = window.localStorage.getItem('token');
   const [ posts, getPosts, loading ] = useGetPosts();
 
-
   const { form, onChange, hadleInputClear } = useForm({
     text: '',
     title: '',
@@ -40,6 +39,10 @@ export default function FeedPage (){
       history.push('/');
     }
   }, [history, token]);
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   const createPost = () => {
     const body = {
