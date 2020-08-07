@@ -1,21 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import axios from 'axios';
-import { baseUrl, axiosConfig } from '../constants/axios';
+import { baseUrl } from '../constants/axios';
 
 const useGetPosts = () => {
-
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
+  const token = window.localStorage.getItem('token');
+  
   const getPosts = () => {
     setLoading(true)
     axios
-    .get(`${baseUrl}posts`, axiosConfig)
+    .get(`${baseUrl}posts`,   
+      {headers: {
+      Authorization : token
+      }})
     .then( response => {
       const somePosts = (response.data.posts)
       setPosts(somePosts.slice(0, 10));
