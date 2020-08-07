@@ -67,7 +67,7 @@ export default function SinglePostPage (){
 
   const onClickLike = (PostId, likeChoise ) => {
     const body = {
-      "direction": likeChoise,
+      'direction': likeChoise,
     };
     axios
       .put(
@@ -86,7 +86,7 @@ export default function SinglePostPage (){
 
   const onClickLikeComment = (CommentId, likeChoise ) => {
     const body = {
-      "direction": likeChoise,
+      'direction': likeChoise,
     };
     axios
       .put(
@@ -139,8 +139,8 @@ export default function SinglePostPage (){
         <SinglePostHeader>
           <UserWrapper>
             <AvatarContainer 
-              src="https://picsum.photos/10"
-              alt="new"
+              src='https://picsum.photos/10'
+              alt='new'
             />
             <p>Posted by u/{singlePost.username}</p>
           </UserWrapper>
@@ -151,8 +151,8 @@ export default function SinglePostPage (){
 
         <SinglePostText>
           <PostPic>
-            <img src="https://picsum.photos/300/420"
-              alt="new"
+            <img src='https://picsum.photos/300/420'
+              alt='new'
             />  
           </PostPic> 
           <p>{singlePost.text}</p>

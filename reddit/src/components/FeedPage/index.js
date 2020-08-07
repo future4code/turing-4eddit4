@@ -77,7 +77,7 @@ export default function FeedPage (){
 
   const onClickLike = (PostId, LikeChoise ) => {
     const body = {
-      "direction": LikeChoise,
+      'direction': LikeChoise,
     };
     axios
       .put(
@@ -121,6 +121,7 @@ export default function FeedPage (){
         />
         <button>POSTAR</button>
       </NewPost>
+
       { loading ? 
       (<Loader />) : 
       (<> 
@@ -130,8 +131,8 @@ export default function FeedPage (){
             <SinglePostHeader>
               <UserWrapper>
                 <AvatarContainer 
-                  src="https://picsum.photos/10"
-                  alt="new"
+                  src='https://picsum.photos/10'
+                  alt='new'
                 />
                 <p>Posted by u/{post.username}</p>
               </UserWrapper>
@@ -142,8 +143,8 @@ export default function FeedPage (){
 
             <SinglePostText>
               <PostPic>
-                <img src="https://picsum.photos/520/320"
-                  alt="new"
+                <img src='https://picsum.photos/520/320'
+                  alt='new'
                 />  
               </PostPic>              
               <p>{post.text}</p>
