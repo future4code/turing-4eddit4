@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renderiza sem crashar 1`] = `"{\\"_reactInternalInstance\\":\\"testingAppRender\\"}"`;

@@ -1,0 +1,38 @@
+*{
+  font-family: verdana!important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dae0e6;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1{
+  margin: 0;
+  padding: 0;
+}
+
+h2{
+  margin: 0;
+  padding: 0;
+}
+
+h3{
+  margin: 0;
+  padding: 0;
+}
+
+h4{
+  margin: 0;
+  padding: 0;
+}
+p{
+  margin: 0;
+  padding: 0;
+}
